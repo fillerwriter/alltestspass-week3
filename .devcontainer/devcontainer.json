@@ -6,6 +6,9 @@
   "postAttachCommand": {
     "server": "npm start"
   },
+  "hostRequirements": {
+    "cpus": 4
+  },
   "customizations": {
     "codespaces": {
       "openFiles": [
