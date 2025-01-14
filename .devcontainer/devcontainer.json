@@ -17,10 +17,10 @@
     }
   },
   "portsAttributes": {
-    "5000": {
+    "3000": {
       "label": "Tests",
       "onAutoForward": "openPreview"
     }
   },
-  "forwardPorts": [5000]
+  "forwardPorts": [3000]
 }
