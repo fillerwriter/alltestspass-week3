@@ -8,7 +8,7 @@
  *
  * The return value is a number with the measurement in converted units. (i.e. convert('16oz', 'lb') == 1, for 1 pound).
  *
- * For our current test suite, valid measurement units are 'g', 'kg', 'lb', and 'oz'.
+ * For our current test suite, valid measurement units are 'g', 'kg', 'lb', 'oz', 'c', 'k', and 'f'.
  *
  * Measurement conversions reference: https://www.nist.gov/pml/owm/approximate-conversions-us-customary-measures-metric
  *
