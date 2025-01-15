@@ -27,6 +27,16 @@ function convert(originalMeasurement, conversionTo) {
         return amount;
     }
 
+    const weights = ['g', 'oz', 'lb'];
+    const temps = ['k', 'f', 'c'];
+
+    if (weights.indexOf(measurementUnit) !== -1 && weights.indexOf(conversionTo) === -1) {
+        throw new Error("Improper conversion");
+    } else if (temps.indexOf(measurementUnit) !== -1 && temps.indexOf(conversionTo) === -1) {
+        throw new Error("Improper conversion");
+    }
+
+
     const conversionsToG = {
         'g': 1,
         'kg': 0.001,
@@ -76,5 +86,15 @@ describe("Week 3 - Measurements", function() {
 
     it ("should convert ounces to pounds.", function() {
         chai.assert.equal(convert("16oz", "lb"), 1, "");
+    });
+
+    it ("should throw an error if converting from a weight to temperature, or temperature to weight", function() {
+        // Quirk with assert.throws, need to pass a function so it can wrap it in a try/catch.
+        chai.assert.throws(() => {convert("100f", "g")}, Error, "Improper conversion");
+    });
+
+    it ("should convert fahrenheit to celcius", function() {
+        chai.assert.equal(convert("100f", "c"), 1, "");
+        chai.assert.equal(convert("0f", "c"), 1, "");
     });
 });
