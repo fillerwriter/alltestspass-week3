@@ -36,13 +36,17 @@ function convert(originalMeasurement, conversionTo) {
         throw new Error("Improper conversion");
     }
 
-
     const conversionsToG = {
-        'g': 1,
-        'kg': 0.001,
-        'lb': 453.59290944,
-        'oz': 28.34949254,
+        'g': (x) => x * 1,
+        'kg': (x) => x * 0.001,
+        'lb': (x) => x * 453.59290944,
+        'oz': (x) => x * 28.34949254,
     };
+    
+    const conversionsToC = {
+        'c': 1,
+        'f': 
+    }
 
     const amountInGrams = Math.round(amount * conversionsToG[measurementUnit] * 1000000) / 1000000;
 
