@@ -83,7 +83,16 @@ describe("Week 3 - Measurements", function() {
     });
 
     it ("should convert fahrenheit to celcius", function() {
-        chai.assert.equal(convert("100f", "c"), 1, "");
-        chai.assert.equal(convert("0f", "c"), 1, "");
+        chai.assert.equal(convert("100f", "c"), 37.7778, "");
+        chai.assert.equal(convert("0f", "c"), -17.7778, "");
+    });
+
+    it ("should convert celcius to fahrenheit", function() {
+        chai.assert.equal(convert("100c", "f"), 212, "");
+        chai.assert.equal(convert("32f", "c"), 0, "");
+    });
+
+    it ("should convert fahrenheit to kelvin", function() {
+        chai.assert.equal(convert("290k", "f"), 62.33, "");
     });
 });
