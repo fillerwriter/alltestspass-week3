@@ -44,20 +44,31 @@ function convert(originalMeasurement, conversionTo) {
     };
     
     const conversionsToC = {
-        'c': 1,
-        'f': 
+        'c': (x) => x * 1,
+        'f': (x) => (x - 32) * (5 / 9),
+        'k': (x) => x - 273.15,
     }
 
-    const amountInGrams = Math.round(amount * conversionsToG[measurementUnit] * 1000000) / 1000000;
+    const conversionFormulas = (weights.indexOf(measurementUnit) !== -1) ? conversionsToG : conversionsToC;
+
+    const amountInDefaultMeasurement = Math.round(conversionFormulas[measurementUnit](amount) * 1000000) / 1000000;
 
     const conversionsFromG = {
-        'g': 1,
-        'kg': 1000,
-        'lb': 1 / 453.59290944,
-        'oz': 1 / 28.34949254,
+        'g': (x) => x * 1,
+        'kg': (x) => x * 1000,
+        'lb': (x) => x * 1 / 453.59290944,
+        'oz': (x) => x * 1 / 28.34949254,
     };
 
-    const convertedAmount = Math.round(amountInGrams * conversionsFromG[conversionTo] * 10000) / 10000;
+    const conversionsFromC = {
+        'c': (x) => x * 1,
+        'f': (x) => (x * 1.8) + 32,
+        'k': (x) => x + 273.15,
+    };
+
+    const conversionFormulas2 = (weights.indexOf(conversionTo) !== -1) ? conversionsFromG : conversionsFromC;
+
+    const convertedAmount = Math.round(conversionFormulas2[conversionTo](amountInDefaultMeasurement) * 10000) / 10000;
 
     return convertedAmount;
 }
@@ -98,7 +109,16 @@ describe("Week 3 - Measurements", function() {
     });
 
     it ("should convert fahrenheit to celcius", function() {
-        chai.assert.equal(convert("100f", "c"), 1, "");
-        chai.assert.equal(convert("0f", "c"), 1, "");
+        chai.assert.equal(convert("100f", "c"), 37.7778, "");
+        chai.assert.equal(convert("0f", "c"), -17.7778, "");
+    });
+
+    it ("should convert celcius to fahrenheit", function() {
+        chai.assert.equal(convert("100c", "f"), 212, "");
+        chai.assert.equal(convert("32f", "c"), 0, "");
+    });
+
+    it ("should convert fahrenheit to kelvin", function() {
+        chai.assert.equal(convert("290k", "f"), 62.33, "");
     });
 });
