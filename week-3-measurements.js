@@ -73,7 +73,6 @@ function convert(originalMeasurement, conversionTo) {
     return convertedAmount;
 }
 
-
 describe("Week 3 - Measurements", function() {
     it ("should return nothing if passed nothing.", function() {
         chai.assert(convert() == undefined, "Nothing passed");
